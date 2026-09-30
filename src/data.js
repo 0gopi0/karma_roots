@@ -1,6 +1,8 @@
 // All copy comes from the client's home page document (KARMA ROOT1.docx).
 // Update CONTACT_EMAIL once the client confirms their address.
 export const CONTACT_EMAIL = 'hello@karmaroots.in'
+export const CONTACT_PHONE = '+91 98765 43210'
+export const CONTACT_LOCATION = 'Bangalore, India'
 
 export const NAV = [
   { label: 'What we do', href: '#roots' },
