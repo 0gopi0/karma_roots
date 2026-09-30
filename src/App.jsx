@@ -7,6 +7,7 @@ import Why from './components/Why'
 import Approach from './components/Approach'
 import Partners from './components/Partners'
 import Contact from './components/Contact'
+import Footer from './components/Footer'
 import Cursor from './components/Cursor'
 import RootLine from './components/RootLine'
 
@@ -32,6 +33,7 @@ export default function App() {
         <Partners />
       </main>
       <Contact />
+      <Footer />
     </div>
   )
 }
