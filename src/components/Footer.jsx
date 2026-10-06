@@ -129,7 +129,7 @@ export default function Footer() {
       />
 
       <div className="relative mx-auto max-w-7xl px-5 md:px-10">
-        <div className="grid gap-x-8 gap-y-10 pb-10 pt-10 md:grid-cols-2 md:pb-12 md:pt-12 lg:grid-cols-[1.4fr_1fr_1.3fr_1.3fr] lg:gap-x-12 lg:gap-y-0">
+        <div className="grid gap-x-8 gap-y-8 pb-10 pt-10 md:grid-cols-2 md:gap-y-10 md:pb-12 md:pt-12 lg:grid-cols-[1.4fr_1fr_1.3fr_1.3fr] lg:gap-x-12 lg:gap-y-0">
           <div>
             <div className="flex flex-col items-center">
               <Lotus className="w-20 text-champagne" strokeWidth={2} />

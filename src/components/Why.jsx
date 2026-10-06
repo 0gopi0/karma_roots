@@ -29,26 +29,19 @@ const ICONS = [
   </g>,
 ]
 
-function onMove(e) {
-  const el = e.currentTarget
-  const r = el.getBoundingClientRect()
-  const x = (e.clientX - r.left) / r.width
-  const y = (e.clientY - r.top) / r.height
-  el.style.setProperty('--x', `${x * 100}%`)
-  el.style.setProperty('--y', `${y * 100}%`)
-  el.style.setProperty('--rx', `${(0.5 - y) * 8}deg`)
-  el.style.setProperty('--ry', `${(x - 0.5) * 10}deg`)
-}
-function onLeave(e) {
-  e.currentTarget.style.setProperty('--rx', '0deg')
-  e.currentTarget.style.setProperty('--ry', '0deg')
-}
+// Column dividers and outer-edge padding for the 2-up and 4-up grids.
+const EDGE = [
+  'sm:border-r sm:pl-0 lg:border-r',
+  'sm:pr-0 lg:border-r lg:pr-7',
+  'sm:border-r sm:pl-0 lg:border-r lg:pl-7',
+  'sm:pr-0',
+]
 
 export default function Why() {
   return (
-    <section id="why" className="relative bg-ivory px-5 py-24 md:px-10 md:py-36">
+    <section id="why" className="relative bg-ivory px-5 py-14 md:px-10 md:py-36">
       <div className="mx-auto max-w-7xl">
-        <div className="grid gap-10 lg:grid-cols-2 lg:gap-20">
+        <div className="grid gap-6 md:gap-10 lg:grid-cols-2 lg:gap-20">
           <div>
             <SectionMark className="text-plum-600">Why Karma Roots</SectionMark>
             <MaskHeading
@@ -70,23 +63,21 @@ export default function Why() {
           </Reveal>
         </div>
 
-        <Reveal as="ul" className="mt-16 grid gap-6 sm:grid-cols-2 lg:mt-24 lg:grid-cols-4 lg:gap-5">
+        <Reveal as="ul" className="mt-10 grid border-t border-plum-700/20 sm:grid-cols-2 md:mt-16 lg:mt-24 lg:grid-cols-4">
           {WHY.map(([title, text], i) => (
-            <li key={title} className="rise [perspective:900px]" style={{ '--d': `${i * 0.1}s` }}>
-              <div
-                onPointerMove={onMove}
-                onPointerLeave={onLeave}
-                className="arch group relative flex h-full min-h-[22rem] flex-col items-center overflow-hidden border border-plum-700/25 bg-blush/60 px-7 pb-9 pt-16 text-center transition-[transform,background-color,border-color] duration-500 ease-bloom [transform:rotateX(var(--rx,0))_rotateY(var(--ry,0))] hover:border-plum-700"
-              >
-                {/* lamp-light fill that rises from the base */}
-                <span className="absolute inset-0 translate-y-full bg-plum-700 transition-transform duration-700 ease-bloom group-hover:translate-y-0" />
-                <span className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 [background:radial-gradient(260px_circle_at_var(--x,50%)_var(--y,50%),rgba(216,186,162,.28),transparent_60%)]" />
-                {/* inner arch hairline */}
-                <span className="arch pointer-events-none absolute inset-3 border border-plum-700/15 transition-colors duration-500 group-hover:border-champagne/30" />
+            <li
+              key={title}
+              className={`rise group relative border-b border-plum-700/20 py-7 sm:px-7 md:py-10 lg:border-b-0 ${EDGE[i]}`}
+              style={{ '--d': `${i * 0.1}s` }}
+            >
+              {/* rule that draws across the top on hover */}
+              <span className="absolute -top-px left-0 h-0.5 w-full origin-left scale-x-0 bg-plum-700 transition-transform duration-700 ease-bloom group-hover:scale-x-100" />
 
+              <div className="flex items-start justify-between">
+                <span className="font-display text-sm tracking-[0.2em] text-gold">0{i + 1}</span>
                 <svg
                   viewBox="0 0 48 48"
-                  className="relative h-14 w-14 text-plum-600 transition-all duration-700 ease-bloom group-hover:-translate-y-1 group-hover:text-champagne"
+                  className="h-11 w-11 text-plum-600/70 transition-all duration-700 ease-bloom group-hover:-translate-y-1 group-hover:text-plum-700"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="1.3"
@@ -96,11 +87,11 @@ export default function Why() {
                 >
                   {ICONS[i]}
                 </svg>
-                <h3 className="relative mt-8 font-display text-[1.6rem] leading-tight text-plum-700 transition-colors duration-500 group-hover:text-champagne-50">
-                  {title}
-                </h3>
-                <p className="relative mt-4 text-ink/70 transition-colors duration-500 group-hover:text-champagne-50/80">{text}</p>
               </div>
+              <h3 className="mt-4 font-display text-[1.55rem] leading-tight text-plum-700 transition-transform duration-500 ease-bloom group-hover:translate-x-1 md:mt-8">
+                {title}
+              </h3>
+              <p className="mt-3 text-ink/70">{text}</p>
             </li>
           ))}
         </Reveal>
