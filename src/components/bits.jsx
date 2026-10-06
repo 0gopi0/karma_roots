@@ -1,5 +1,21 @@
 import { useInView } from '../hooks'
 
+/** Traditional temple-border strip: alternating diamonds and dots. */
+export function TempleBorder({ color = '#d8baa2', className = '' }) {
+  const stroke = encodeURIComponent(color)
+  return (
+    <div
+      aria-hidden="true"
+      className={`h-3 w-full ${className}`}
+      style={{
+        backgroundImage: `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='12'><path d='M7 1 L12 6 L7 11 L2 6 Z' fill='none' stroke='${stroke}' stroke-width='.8'/><circle cx='21' cy='6' r='1.4' fill='${stroke}'/></svg>")`,
+        backgroundRepeat: 'repeat-x',
+        backgroundPosition: 'center',
+      }}
+    />
+  )
+}
+
 /** Small section marker: the logo's three rising dots + a sentence-case label. */
 export function SectionMark({ children, className = '' }) {
   return (

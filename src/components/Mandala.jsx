@@ -1,8 +1,8 @@
 // Decorative rangoli-style ring built from the logo's petal + dot vocabulary.
-export default function Mandala({ className = '', petals = 24, strokeWidth = 0.6 }) {
+export default function Mandala({ className = '', petals = 24, strokeWidth = 0.6, ...rest }) {
   const items = Array.from({ length: petals })
   return (
-    <svg viewBox="0 0 400 400" fill="none" stroke="currentColor" strokeWidth={strokeWidth} className={className} aria-hidden="true">
+    <svg viewBox="0 0 400 400" fill="none" stroke="currentColor" strokeWidth={strokeWidth} className={className} aria-hidden="true" {...rest}>
       <circle cx="200" cy="200" r="196" strokeDasharray="1 6" strokeLinecap="round" />
       <circle cx="200" cy="200" r="150" />
       <circle cx="200" cy="200" r="118" strokeDasharray="2 4" />
