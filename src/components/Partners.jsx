@@ -10,7 +10,7 @@ const GROUPS = [
 
 export default function Partners() {
   return (
-    <section id="who" className="relative overflow-hidden bg-blush px-5 py-24 md:px-10 md:py-28">
+    <section id="who" className="relative overflow-hidden bg-blush px-5 py-14 md:px-10 md:py-28">
       <TempleBorder color="#4d262e" className="absolute inset-x-0 top-0 opacity-20" />
 
       <div className="relative mx-auto max-w-6xl">
@@ -27,18 +27,18 @@ export default function Partners() {
           </Reveal>
         </div>
 
-        <Reveal as="ul" className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <Reveal as="ul" className="mt-8 grid gap-4 sm:grid-cols-2 md:mt-12 lg:grid-cols-4">
           {GROUPS.map((group, i) => (
             <li
               key={group}
-              className="rise group rounded-2xl border border-plum-700/15 bg-ivory p-6 shadow-[0_20px_45px_-38px_rgba(77,38,46,.8)] transition-all duration-500 ease-bloom hover:-translate-y-1 hover:border-plum-700/35 hover:shadow-[0_28px_50px_-34px_rgba(77,38,46,.75)]"
+              className="rise group rounded-2xl border border-plum-700/15 bg-ivory p-5 shadow-[0_20px_45px_-38px_rgba(77,38,46,.8)] transition-all duration-500 ease-bloom hover:-translate-y-1 hover:border-plum-700/35 hover:shadow-[0_28px_50px_-34px_rgba(77,38,46,.75)] md:p-6"
               style={{ '--d': `${i * 0.08}s` }}
             >
               <span
                 className="block h-1.5 w-1.5 rotate-45 border border-gold transition-colors duration-500 ease-bloom group-hover:bg-gold"
                 aria-hidden="true"
               />
-              <p className="mt-5 font-display text-[1.15rem] leading-snug text-plum-700">{group}</p>
+              <p className="mt-3 font-display text-[1.15rem] leading-snug text-plum-700 md:mt-5">{group}</p>
             </li>
           ))}
         </Reveal>

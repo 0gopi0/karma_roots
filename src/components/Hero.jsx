@@ -40,7 +40,7 @@ export default function Hero() {
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_72%_45%,#6e3441_0%,#4d262e_42%,#2b1219_100%)]" />
       <Pollen />
 
-      <div className="relative mx-auto grid min-h-[100svh] max-w-7xl grid-cols-1 items-center gap-6 px-5 pt-28 md:px-10 lg:grid-cols-[1.1fr_1fr] lg:gap-10 lg:pt-20">
+      <div className="relative mx-auto grid min-h-[100svh] max-w-7xl grid-cols-1 items-center gap-6 px-5 pt-24 md:px-10 md:pt-28 lg:grid-cols-[1.1fr_1fr] lg:gap-10 lg:pt-20">
         {/* copy */}
         <div className={`relative z-10 py-6 ${ready ? 'in-view' : ''}`}>
           <p
@@ -87,7 +87,7 @@ export default function Hero() {
 
         {/* art */}
         <div
-          className="relative px-2 pb-16 sm:px-8 lg:px-0 lg:pb-0"
+          className="relative px-2 pb-10 sm:px-8 md:pb-16 lg:px-0 lg:pb-0"
           style={{ transform: 'translate3d(calc(var(--mx, 0) * -14px), calc(var(--my, 0) * -10px), 0)' }}
         >
           <HeroOrbit ready={ready} />

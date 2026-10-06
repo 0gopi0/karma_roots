@@ -39,9 +39,9 @@ const EDGE = [
 
 export default function Why() {
   return (
-    <section id="why" className="relative bg-ivory px-5 py-24 md:px-10 md:py-36">
+    <section id="why" className="relative bg-ivory px-5 py-14 md:px-10 md:py-36">
       <div className="mx-auto max-w-7xl">
-        <div className="grid gap-10 lg:grid-cols-2 lg:gap-20">
+        <div className="grid gap-6 md:gap-10 lg:grid-cols-2 lg:gap-20">
           <div>
             <SectionMark className="text-plum-600">Why Karma Roots</SectionMark>
             <MaskHeading
@@ -63,11 +63,11 @@ export default function Why() {
           </Reveal>
         </div>
 
-        <Reveal as="ul" className="mt-16 grid border-t border-plum-700/20 sm:grid-cols-2 lg:mt-24 lg:grid-cols-4">
+        <Reveal as="ul" className="mt-10 grid border-t border-plum-700/20 sm:grid-cols-2 md:mt-16 lg:mt-24 lg:grid-cols-4">
           {WHY.map(([title, text], i) => (
             <li
               key={title}
-              className={`rise group relative border-b border-plum-700/20 py-10 sm:px-7 lg:border-b-0 ${EDGE[i]}`}
+              className={`rise group relative border-b border-plum-700/20 py-7 sm:px-7 md:py-10 lg:border-b-0 ${EDGE[i]}`}
               style={{ '--d': `${i * 0.1}s` }}
             >
               {/* rule that draws across the top on hover */}
@@ -88,7 +88,7 @@ export default function Why() {
                   {ICONS[i]}
                 </svg>
               </div>
-              <h3 className="mt-8 font-display text-[1.55rem] leading-tight text-plum-700 transition-transform duration-500 ease-bloom group-hover:translate-x-1">
+              <h3 className="mt-4 font-display text-[1.55rem] leading-tight text-plum-700 transition-transform duration-500 ease-bloom group-hover:translate-x-1 md:mt-8">
                 {title}
               </h3>
               <p className="mt-3 text-ink/70">{text}</p>

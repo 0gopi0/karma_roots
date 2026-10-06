@@ -14,11 +14,11 @@ export default function Roots() {
   }, [])
 
   return (
-    <section id="roots" className="relative overflow-hidden bg-ivory px-5 py-24 md:px-10 md:py-28">
+    <section id="roots" className="relative overflow-hidden bg-ivory px-5 py-14 md:px-10 md:py-28">
       <TempleBorder color="#4d262e" className="absolute inset-x-0 top-0 opacity-20" />
 
       <div className="relative mx-auto max-w-6xl">
-        <div className="grid gap-14 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+        <div className="grid gap-10 md:gap-14 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
           <div className="relative lg:sticky lg:top-28 lg:self-start">
             <div
               className="pointer-events-none absolute -left-20 -top-16 hidden h-[19rem] w-[19rem] text-plum-700/[0.07] lg:block"
@@ -56,7 +56,7 @@ export default function Roots() {
                       onClick={() => setOpen(on ? null : i)}
                       aria-expanded={on}
                       aria-controls={`root-${r.key}`}
-                      className="group grid w-full grid-cols-[2.5rem_1fr_auto] items-center gap-x-4 py-6 text-left md:grid-cols-[3rem_1fr_auto] md:gap-x-6 md:py-7"
+                      className="group grid w-full grid-cols-[2.5rem_1fr_auto] items-center gap-x-4 py-5 text-left md:grid-cols-[3rem_1fr_auto] md:gap-x-6 md:py-7"
                     >
                       <span
                         className={`flex h-7 w-7 rotate-45 items-center justify-center border transition-colors duration-500 ease-bloom md:h-8 md:w-8 ${
@@ -102,7 +102,7 @@ export default function Roots() {
                   >
                     <div className="overflow-hidden">
                       <div
-                        className={`ml-3.5 grid gap-8 border-l border-gold/30 pb-10 pl-10 transition-opacity duration-500 md:ml-4 md:pl-14 ${
+                        className={`ml-3.5 grid gap-6 border-l border-gold/30 pb-8 pl-10 transition-opacity duration-500 md:ml-4 md:gap-8 md:pb-10 md:pl-14 ${
                           on ? 'opacity-100 delay-150' : 'opacity-0'
                         }`}
                       >

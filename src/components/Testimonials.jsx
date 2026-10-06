@@ -67,7 +67,7 @@ export default function Testimonials() {
   }, [])
 
   return (
-    <section id="testimonials" className="relative overflow-hidden bg-ivory px-5 py-24 md:px-10 md:py-28">
+    <section id="testimonials" className="relative overflow-hidden bg-ivory px-5 py-14 md:px-10 md:py-28">
       <TempleBorder color="#4d262e" className="absolute inset-x-0 top-0 opacity-20" />
 
       <div className="relative mx-auto max-w-6xl">
@@ -76,12 +76,12 @@ export default function Testimonials() {
           <span className="mx-auto mt-3 block h-px w-12 bg-gradient-to-r from-transparent via-gold/70 to-transparent" aria-hidden="true" />
         </div>
 
-        <Reveal className="mt-12">
+        <Reveal className="mt-8 md:mt-12">
           <ul
             id="testimonial-track"
             ref={trackRef}
             onScroll={sync}
-            className="flex snap-x snap-mandatory gap-4 overflow-x-auto overflow-y-hidden overscroll-x-contain pb-8 [scrollbar-width:none] md:grid md:grid-cols-3 md:overflow-visible md:pb-0 [&::-webkit-scrollbar]:hidden"
+            className="flex snap-x snap-mandatory gap-4 overflow-x-auto overflow-y-hidden overscroll-x-contain pb-8 scrollbar-none md:grid md:grid-cols-3 md:overflow-visible md:pb-0"
           >
             {TESTIMONIALS.map((t, i) => (
               <li

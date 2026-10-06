@@ -36,10 +36,10 @@ function Seal() {
 
 export default function Founder() {
   return (
-    <section id="founder" className="relative overflow-hidden bg-champagne-50 px-5 py-24 md:px-10 md:py-28">
+    <section id="founder" className="relative overflow-hidden bg-champagne-50 px-5 py-14 md:px-10 md:py-28">
       <TempleBorder color="#4d262e" className="absolute inset-x-0 top-0 opacity-25" />
 
-      <div className="relative mx-auto grid max-w-6xl gap-x-20 gap-y-14 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
+      <div className="relative mx-auto grid max-w-6xl gap-x-20 gap-y-10 md:gap-y-14 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
         {/* portrait in a temple arch, ringed by a rangoli */}
         <Reveal className="mx-auto w-full max-w-[340px] lg:col-start-1 lg:row-start-1">
           <div className="rise relative">

@@ -46,7 +46,7 @@ export default function Approach() {
   }
 
   return (
-    <section id="approach" className="relative overflow-hidden bg-plum-900 px-5 py-24 text-champagne-50 md:px-10 md:py-32">
+    <section id="approach" className="relative overflow-hidden bg-plum-900 px-5 py-14 text-champagne-50 md:px-10 md:py-32">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_70%_20%,rgba(110,52,65,.5),transparent_60%)]" />
 
       <div className="relative mx-auto max-w-7xl">
@@ -82,7 +82,7 @@ export default function Approach() {
           ))}
         </div>
 
-        <ol ref={ref} className="mt-10 grid gap-4 sm:grid-cols-2 lg:mt-8 lg:grid-cols-4 lg:gap-5">
+        <ol ref={ref} className="mt-8 grid gap-4 sm:grid-cols-2 md:mt-10 lg:mt-8 lg:grid-cols-4 lg:gap-5">
           {APPROACH.map(([name, text], i) => {
             const on = active === i
             return (
@@ -93,7 +93,7 @@ export default function Approach() {
                   onFocus={() => pick(i)}
                   onClick={() => pick(i)}
                   aria-pressed={on}
-                  className={`relative flex h-full min-h-[12rem] w-full flex-col overflow-hidden rounded-2xl border p-7 text-left sm:min-h-[17rem] transition-all duration-500 ease-bloom ${
+                  className={`relative flex h-full min-h-[12rem] w-full flex-col overflow-hidden rounded-2xl border p-6 text-left sm:min-h-[17rem] md:p-7 transition-all duration-500 ease-bloom ${
                     on
                       ? '-translate-y-2 border-champagne bg-champagne text-plum-900 shadow-[0_30px_60px_-25px_rgba(0,0,0,.7)]'
                       : 'border-champagne/15 bg-plum-800/50 text-champagne-50 hover:border-champagne/40'
@@ -123,7 +123,7 @@ export default function Approach() {
                     )}
                   </div>
 
-                  <h3 className="mt-auto pt-8 font-display text-[2rem] leading-none">{name}.</h3>
+                  <h3 className="mt-auto pt-5 font-display text-[2rem] leading-none md:pt-8">{name}.</h3>
                   <p className={`mt-3 text-[1.02rem] leading-snug ${on ? 'text-plum-900/75' : 'text-champagne/65'}`}>{text}</p>
                 </button>
               </li>
@@ -131,7 +131,7 @@ export default function Approach() {
           })}
         </ol>
 
-        <div className="mx-auto mt-24 max-w-5xl md:mt-32">
+        <div className="mx-auto mt-14 max-w-5xl md:mt-32">
           <ScrollWords
             className="font-display text-[clamp(1.8rem,4.4vw,3.4rem)] leading-[1.2] text-champagne-50"
             dim="opacity-15"
