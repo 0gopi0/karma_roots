@@ -1,34 +1,35 @@
 import { MaskHeading, Reveal, SectionMark, TempleBorder } from './bits'
 
-// The four groups named in the copy, one per card.
-const GROUPS = [
-  'Ambitious businesses',
-  'Established organisations',
-  'Founders & leaders',
-  'Brands entering their next phase',
-]
+const DEFAULT_COPY = {
+  mark: 'Who we work with',
+  title: 'From ambitious businesses and established organisations to founders, leaders and brands entering their next phase.',
+  intro: 'We partner with people who value clarity, creativity and conversations that go beyond the brief.',
+  // The four groups named in the copy, one per card.
+  groups: ['Ambitious businesses', 'Established organisations', 'Founders & leaders', 'Brands entering their next phase'],
+}
 
-export default function Partners() {
+export default function Partners({ copy }) {
+  const c = { ...DEFAULT_COPY, ...copy }
   return (
     <section id="who" className="relative overflow-hidden bg-blush px-5 py-14 md:px-10 md:py-28">
       <TempleBorder color="#4d262e" className="absolute inset-x-0 top-0 opacity-20" />
 
       <div className="relative mx-auto max-w-6xl">
         <div className="text-center">
-          <SectionMark className="justify-center text-plum-600">Who we work with</SectionMark>
+          <SectionMark className="justify-center text-plum-600">{c.mark}</SectionMark>
           <MaskHeading
             className="mx-auto mt-4 max-w-3xl font-display text-[clamp(1.5rem,3vw,2.3rem)] leading-[1.2] text-plum-700"
-            lines={['From ambitious businesses and established organisations to founders, leaders and brands entering their next phase.']}
+            lines={[c.title]}
           />
           <Reveal>
             <p className="rise mx-auto mt-5 max-w-xl text-lg text-ink/75" style={{ '--d': '.15s' }}>
-              We partner with people who value clarity, creativity and conversations that go beyond the brief.
+              {c.intro}
             </p>
           </Reveal>
         </div>
 
         <Reveal as="ul" className="mt-8 grid gap-4 sm:grid-cols-2 md:mt-12 lg:grid-cols-4">
-          {GROUPS.map((group, i) => (
+          {c.groups.map((group, i) => (
             <li
               key={group}
               className="rise group rounded-2xl border border-plum-700/15 bg-ivory p-5 shadow-[0_20px_45px_-38px_rgba(77,38,46,.8)] transition-all duration-500 ease-bloom hover:-translate-y-1 hover:border-plum-700/35 hover:shadow-[0_28px_50px_-34px_rgba(77,38,46,.75)] md:p-6"

@@ -1,6 +1,9 @@
 import { ROOTS } from '../data'
 
-const ALL = ROOTS.flatMap((r) => r.services.map(([n]) => n))
+const DEFAULT_COPY = {
+  label: 'Services at a glance',
+  items: ROOTS.flatMap((r) => r.services.map(([n]) => n)),
+}
 
 function Border() {
   // temple-border strip: alternating diamonds and dots
@@ -38,12 +41,13 @@ function Row({ items }) {
   )
 }
 
-export default function Marquee() {
+export default function Marquee({ copy }) {
+  const c = { ...DEFAULT_COPY, ...copy }
   return (
-    <section aria-label="Services at a glance" className="relative bg-plum-900 py-2">
+    <section aria-label={c.label} className="relative bg-plum-900 py-2">
       <Border />
       <div className="py-3 md:py-4">
-        <Row items={ALL} />
+        <Row items={c.items} />
       </div>
       <Border />
     </section>

@@ -1,0 +1,556 @@
+/* Theme 2 — dark top, light middle, dark close.
+   Scoped to .theme-2 so the main site is untouched.
+
+   This file is unlayered, so it wins over Tailwind's layered utilities.
+   Content selectors are wrapped in :where() to keep their specificity at
+   (0,1,0); later rules and `.theme-2 .section-mark` can then override them. */
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Palette — olive / charcoal / terracotta / antique gold
+   Tailwind v4 utilities read their colours from these vars, so redefining the
+   tokens here recolours every plum/gold/champagne/ivory utility inside
+   .theme-2 without touching component classes. Plum keeps its name but now
+   holds a charcoal → olive ramp.
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.theme-2 {
+  --color-plum-950: #1b1915;
+  --color-plum-900: #28251f; /* rich charcoal */
+  --color-plum-800: #33302a;
+  --color-plum-700: #3f4723; /* deep olive */
+  --color-plum-600: #55602f;
+  --color-plum-500: #b4704e; /* muted terracotta */
+  --color-gold: #b08d3e; /* antique gold */
+  --color-champagne: #e4cfaf;
+  --color-champagne-50: #f4ede1;
+  --color-champagne-200: #ecdcc4;
+  --color-ivory: #f4ede1; /* warm paper */
+  --color-blush: #eaddcb; /* deeper sand */
+  --color-ink: #28251f;
+
+  --t2-olive-deep: #2e3319; /* contact base */
+  --t2-cta: linear-gradient(90deg, #d2b46e, #c09c4e 50%, #b08d3e);
+  --t2-cta-shadow: 0 12px 30px -10px rgb(176 141 62 / 0.7);
+  --t2-cta-shadow-hover: 0 16px 40px -8px rgb(210 180 110 / 0.8);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Section colours
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* Dark top: charcoal with an olive glow (replaces the hardcoded plum radial) */
+.theme-2 #top {
+  background-color: var(--color-plum-900);
+  color: var(--color-ivory);
+}
+.theme-2 #top > div:first-child {
+  background-image: radial-gradient(ellipse at 72% 45%, rgb(63 71 35 / 0.55) 0%, transparent 70%);
+}
+
+/* Light middle: alternate paper / sand, ink text */
+.theme-2 #founder,
+.theme-2 #why,
+.theme-2 #who {
+  background-color: var(--color-ivory);
+  color: var(--color-ink);
+}
+.theme-2 #roots {
+  background-color: var(--color-blush);
+  color: var(--color-ink);
+}
+
+/* Testimonials: olive-green chapter; cards keep paper fill with dark interiors */
+.theme-2 #testimonials {
+  background-color: var(--color-plum-700);
+  color: var(--t2-on-dark);
+}
+.theme-2 #testimonials :where(h2, h3) {
+  color: var(--t2-on-dark);
+}
+.theme-2 #testimonials .section-mark {
+  color: var(--t2-gold);
+}
+.theme-2 #testimonials > .h-3[aria-hidden='true'] {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='12'><path d='M7 1 L12 6 L7 11 L2 6 Z' fill='none' stroke='%23B08D3E' stroke-width='.8'/><circle cx='21' cy='6' r='1.4' fill='%23B08D3E'/></svg>") !important;
+}
+.theme-2 #testimonials :where(figure > div > span:first-child) {
+  color: var(--t2-gold-deep);
+}
+.theme-2 #testimonials :where(figure > div > span:last-child) {
+  letter-spacing: var(--t2-tracking-caps);
+  color: var(--t2-gold-deep);
+}
+/* Card interiors: paper fill, dark ink text (component defaults already do this) */
+.theme-2 #testimonials button[aria-controls='testimonial-track'] {
+  border-color: rgb(244 237 225 / 0.4);
+  color: var(--color-ivory);
+}
+
+/* Temple-border strips use an inline data-uri, so swap the image itself */
+.theme-2 :is(#founder, #roots, #who) > .h-3[aria-hidden='true'] {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='12'><path d='M7 1 L12 6 L7 11 L2 6 Z' fill='none' stroke='%238F5636' stroke-width='.8'/><circle cx='21' cy='6' r='1.4' fill='%238F5636'/></svg>") !important;
+}
+
+/* Card + portrait shadows: plum tint → charcoal */
+.theme-2 :is(#who, #testimonials) li.rise {
+  box-shadow: 0 20px 45px -38px rgb(40 37 31 / 0.8);
+}
+.theme-2 :is(#who, #testimonials) li.rise:hover {
+  box-shadow: 0 28px 50px -34px rgb(40 37 31 / 0.75);
+}
+.theme-2 #founder .rounded-t-full.overflow-hidden {
+  box-shadow: 0 40px 70px -30px rgb(40 37 31 / 0.6);
+}
+
+/* Marquee band: deep olive, gold strips */
+.theme-2 section:has(.animate-marquee) {
+  background-color: var(--color-plum-700);
+}
+.theme-2 section:has(.animate-marquee) > .h-3 {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='12'><path d='M7 1 L12 6 L7 11 L2 6 Z' fill='none' stroke='%23B08D3E' stroke-width='.8'/><circle cx='21' cy='6' r='1.4' fill='%23B08D3E'/></svg>") !important;
+}
+
+/* Approach: charcoal chapter with an olive glow */
+.theme-2 #approach > div:first-child {
+  background-image: radial-gradient(ellipse at 70% 20%, rgb(63 71 35 / 0.5), transparent 60%);
+}
+
+/* Contact: white chapter, ink text */
+.theme-2 #contact {
+  background-color: #ffffff;
+  color: var(--color-ink);
+}
+.theme-2 #contact > div:nth-child(1) {
+  background-image: radial-gradient(75% 70% at 50% 15%, rgb(244 237 225 / 0.9) 0%, rgb(244 237 225 / 0) 72%);
+}
+.theme-2 #contact > div:nth-child(2) {
+  background-image: radial-gradient(115% 100% at 50% 45%, transparent 45%, rgb(40 37 31 / 0.06) 100%);
+}
+.theme-2 #contact :where(h2) {
+  color: var(--color-ink);
+}
+.theme-2 #contact .section-mark {
+  color: var(--t2-gold-deep);
+}
+.theme-2 #contact :where(p:not(.section-mark)) {
+  color: rgb(40 37 31 / 0.74);
+}
+
+/* Footer: olive-green close */
+.theme-2 footer {
+  background-color: var(--color-plum-700);
+}
+.theme-2 footer > div:first-child {
+  background-image: radial-gradient(90% 70% at 50% 0%, rgb(63 71 35 / 0.35), transparent 70%);
+}
+
+/* Gold CTAs (hero + contact): antique-gold gradient, charcoal text */
+.theme-2 :is(#top a[href='#contact'], #contact a[href^='mailto']) {
+  background-image: var(--t2-cta);
+  color: var(--color-plum-900);
+  box-shadow: var(--t2-cta-shadow);
+}
+.theme-2 :is(#top a[href='#contact'], #contact a[href^='mailto']):hover {
+  box-shadow: var(--t2-cta-shadow-hover);
+}
+
+/* Hero orbit: ivory nodes, antique-gold flow lines, olive/charcoal core */
+.theme-2 #top .orbit line {
+  stroke: var(--color-gold);
+}
+.theme-2 #top .orbit circle {
+  fill: var(--color-gold);
+}
+.theme-2 #top .orbit button > span:first-child {
+  border-color: rgb(244 237 225 / 0.4);
+  color: var(--color-ivory);
+}
+.theme-2 #top .orbit button > span.scale-110:first-child {
+  border-color: var(--color-ivory);
+  background-color: var(--color-ivory);
+  color: var(--color-plum-900);
+  box-shadow: 0 0 40px 6px rgb(176 141 62 / 0.35);
+}
+.theme-2 #top .orbit button > span.text-champagne\/80 {
+  color: rgb(244 237 225 / 0.8);
+}
+.theme-2 #top .orbit + div {
+  background-image: radial-gradient(circle at 50% 35%, #3f4723, #1b1915 75%);
+  box-shadow: 0 30px 80px -20px rgb(15 14 11 / 0.9), inset 0 0 40px rgb(176 141 62 / 0.12);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Typography tokens — "premium film" minimal
+   Per section: one display size, one body size, plus the shared label tier.
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.theme-2 {
+  /* sizes */
+  --t2-hero: clamp(2.25rem, 9vw, 3.9rem);
+  --t2-hero-lg: clamp(3rem, 5.2vw, 5.25rem);
+  --t2-display: clamp(2.4rem, 5.4vw, 4.4rem);
+  --t2-display-sm: clamp(1.75rem, 3.6vw, 3.1rem);
+  --t2-title: clamp(1.45rem, 1.15rem + 1vw, 1.95rem);
+  --t2-body: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem); /* 17 → 19px */
+  --t2-small: 0.9375rem; /* footer only */
+  --t2-label: 0.72rem; /* ≈ 11.5px */
+
+  /* rhythm */
+  --t2-leading-display: 1;
+  --t2-leading-body: 1.8;
+  --t2-tracking-display: -0.02em;
+  --t2-tracking-label: 0.35em;
+  --t2-tracking-caps: 0.22em; /* longer small-caps lines */
+
+  /* colour: lead lines bright, supporting lines dim (film-credit hierarchy) */
+  --t2-on-dark: var(--color-ivory);
+  --t2-on-dark-dim: rgb(244 237 225 / 0.66);
+  --t2-on-light: var(--color-ink);
+  --t2-on-light-dim: rgb(40 37 31 / 0.74);
+  --t2-gold: #c9a961; /* bright gold, on dark */
+  --t2-gold-deep: #8f5636; /* deep terracotta, AA contrast on paper/sand */
+
+  counter-reset: t2-section;
+}
+
+.theme-2 * {
+  text-shadow: none;
+}
+
+/* ── Shared tiers ───────────────────────────────────────────────────────────── */
+
+.theme-2 :where(h1, h2, h3) {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: var(--t2-tracking-display);
+}
+.theme-2 :where(h1, h2) {
+  line-height: var(--t2-leading-display);
+}
+.theme-2 :where(main h2) {
+  font-size: var(--t2-display);
+}
+.theme-2 :where(#founder, #roots, #why, #who, #testimonials) :where(h2, h3) {
+  color: var(--t2-on-light);
+}
+.theme-2 :where(#top, #approach, #contact) h2 {
+  color: var(--t2-on-dark);
+}
+
+/* Foil gradient → flat ivory-champagne: second title line reads as the dim credit */
+.theme-2 :where(#top, #contact) .foil {
+  background: none;
+  color: var(--color-champagne);
+  -webkit-text-fill-color: currentColor;
+  animation: none;
+}
+
+/* Small-caps label (shared mixin, applied per element below) */
+.theme-2 :where(
+    #top :has(> h1) > p:first-child,
+    #founder h2 + div > p:nth-of-type(1),
+    #founder h2 + div > p:nth-of-type(3),
+    #founder dt,
+    #roots h3 button > span:nth-child(3),
+    #why li > div > span,
+    #approach ol button > div > span,
+    #testimonials figure > div > span:last-child,
+    #testimonials figcaption > span:nth-child(2) > span:last-child,
+    .animate-marquee li > span,
+    #top a[href='#contact'],
+    #contact a[href^='mailto'],
+    header nav > a > span,
+    header nav ul a,
+    #mobile-menu > p,
+    footer h3,
+    footer h3 ~ p,
+    footer > div > div > div:first-child > p:first-of-type
+  ) {
+  font-family: var(--font-body);
+  font-size: var(--t2-label);
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: var(--t2-tracking-label);
+  text-transform: uppercase;
+}
+
+/* Film-title section numbers: "01 — Meet the founder" */
+.theme-2 .section-mark {
+  gap: 0;
+  font-family: var(--font-body);
+  font-size: var(--t2-label);
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: var(--t2-tracking-label);
+  text-transform: uppercase;
+  color: var(--t2-gold);
+}
+.theme-2 .section-mark > svg {
+  display: none;
+}
+.theme-2 .section-mark::before {
+  counter-increment: t2-section;
+  content: counter(t2-section, decimal-leading-zero) '\00a0\00a0—\00a0\00a0';
+}
+.theme-2 :where(#founder, #roots, #why, #who) .section-mark {
+  color: var(--t2-gold-deep);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Hero — letterbox
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.theme-2 #top::before,
+.theme-2 #top::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  z-index: 1;
+  height: 1px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgb(176 141 62 / 0.45) 18%, rgb(176 141 62 / 0.45) 82%, transparent);
+}
+.theme-2 #top::before {
+  top: 5rem;
+}
+.theme-2 #top::after {
+  bottom: 1.75rem;
+}
+@media (min-width: 768px) {
+  .theme-2 #top::before {
+    top: 6.25rem;
+  }
+  .theme-2 #top::after {
+    bottom: 2.5rem;
+  }
+}
+
+.theme-2 :where(#top h1) {
+  font-size: var(--t2-hero);
+  color: var(--t2-on-dark);
+}
+@media (min-width: 1024px) {
+  .theme-2 :where(#top h1) {
+    font-size: var(--t2-hero-lg);
+  }
+}
+.theme-2 :where(#top :has(> h1) > p:first-child) {
+  color: var(--t2-gold);
+}
+.theme-2 :where(#top h1 + p) {
+  margin-top: 2rem;
+  font-size: var(--t2-body);
+  line-height: var(--t2-leading-body);
+  color: var(--t2-on-dark-dim);
+}
+.theme-2 :where(#top a[href='#contact']) {
+  letter-spacing: var(--t2-tracking-caps);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   01 Founder
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.theme-2 :where(#founder h2 + div > p:nth-of-type(1)) {
+  margin-top: 1rem;
+  letter-spacing: var(--t2-tracking-caps);
+  color: var(--t2-on-light-dim);
+}
+.theme-2 :where(#founder h2 + div > p:nth-of-type(2)) {
+  font-size: var(--t2-body);
+  line-height: var(--t2-leading-body);
+  color: var(--t2-on-light-dim);
+}
+.theme-2 :where(#founder h2 + div > p:nth-of-type(3)) {
+  margin-top: 2.5rem;
+  color: var(--t2-gold-deep);
+}
+.theme-2 :where(#founder h2 + div li) {
+  font-size: var(--t2-body);
+  color: var(--t2-on-light);
+}
+.theme-2 :where(#founder dd) {
+  font-size: var(--t2-display-sm);
+  letter-spacing: var(--t2-tracking-display);
+  color: var(--t2-on-light);
+}
+.theme-2 :where(#founder dt) {
+  letter-spacing: 0.14em;
+  color: var(--t2-on-light-dim);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   02 Roots
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.theme-2 :where(#roots h2 ~ div > p) {
+  font-size: var(--t2-body);
+  line-height: var(--t2-leading-body);
+  color: var(--t2-on-light-dim);
+}
+.theme-2 :where(#roots h3 button > span:nth-child(2)) {
+  font-size: var(--t2-title);
+  letter-spacing: var(--t2-tracking-display);
+  line-height: 1.05;
+  color: rgb(40 37 31 / 0.55);
+}
+.theme-2 :where(#roots h3 button:hover > span:nth-child(2), #roots h3 button[aria-expanded='true'] > span:nth-child(2)) {
+  color: var(--t2-on-light);
+}
+.theme-2 :where(#roots h3 button > span:nth-child(3)) {
+  margin-top: 0.4rem;
+  letter-spacing: var(--t2-tracking-caps);
+  color: var(--t2-on-light-dim);
+}
+.theme-2 :where(#roots [id^='root-'] p) {
+  font-size: var(--t2-body);
+  line-height: 1.65;
+}
+.theme-2 :where(#roots [id^='root-'] p:first-child) {
+  color: var(--t2-on-light);
+}
+.theme-2 :where(#roots [id^='root-'] p + p) {
+  color: var(--t2-on-light-dim);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Marquee — credit roll
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.theme-2 :where(.animate-marquee li > span) {
+  padding-inline: 1.75rem;
+  color: var(--t2-on-dark);
+}
+.theme-2 :where(.animate-marquee li > span:hover) {
+  color: var(--t2-on-dark);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   03 Why
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.theme-2 :where(#why div > p) {
+  font-size: var(--t2-body);
+  line-height: var(--t2-leading-body);
+  color: var(--t2-on-light-dim);
+}
+.theme-2 :where(#why div > p:not(.section-mark):first-child) {
+  font-family: var(--font-display);
+  font-size: var(--t2-title);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--t2-on-light);
+}
+.theme-2 :where(#why li > div > span) {
+  color: var(--t2-gold-deep);
+}
+.theme-2 :where(#why li h3) {
+  font-size: var(--t2-title);
+  line-height: 1.1;
+}
+.theme-2 :where(#why li > p) {
+  font-size: var(--t2-body);
+  line-height: var(--t2-leading-body);
+  color: var(--t2-on-light-dim);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   04 Approach (dark). Card colours flip on the active card, so only size,
+   rhythm and tracking are set here — never colour.
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.theme-2 :where(#approach div > p:not([aria-label])) {
+  font-size: var(--t2-body);
+  line-height: var(--t2-leading-body);
+  color: var(--t2-on-dark-dim);
+}
+.theme-2 :where(#approach ol h3) {
+  font-size: var(--t2-title);
+  line-height: 1;
+}
+.theme-2 :where(#approach ol button > p) {
+  font-size: var(--t2-body);
+  line-height: 1.65;
+}
+.theme-2 :where(#approach div > p[aria-label]) {
+  font-size: var(--t2-display);
+  line-height: 1.1;
+  letter-spacing: var(--t2-tracking-display);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   05 Who we work with
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.theme-2 :where(#who h2) {
+  font-size: var(--t2-display-sm);
+  line-height: 1.1;
+}
+.theme-2 :where(#who h2 + div > p) {
+  font-size: var(--t2-body);
+  line-height: var(--t2-leading-body);
+  color: var(--t2-on-light-dim);
+}
+.theme-2 :where(#who li > p) {
+  font-size: var(--t2-body);
+  line-height: 1.4;
+  color: var(--t2-on-light);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   06 Testimonials — interiors keep component defaults (dark on paper);
+   only the quote-mark accent is tuned here.
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* (quote-mark handled in the section-colour block above) */
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   07 Contact
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.theme-2 :where(#contact h2) {
+  font-size: var(--t2-display-sm);
+  color: var(--color-ink);
+}
+.theme-2 :where(#contact p:not(.section-mark)) {
+  font-size: var(--t2-body);
+  line-height: var(--t2-leading-body);
+  color: rgb(40 37 31 / 0.74);
+}
+.theme-2 :where(#contact a[href^='mailto']) {
+  letter-spacing: var(--t2-tracking-caps);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Nav + mobile menu
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.theme-2 :where(header nav > a > span) {
+  font-size: 0.8rem;
+}
+.theme-2 :where(header nav ul a) {
+  letter-spacing: var(--t2-tracking-caps);
+}
+.theme-2 :where(#mobile-menu a) {
+  letter-spacing: var(--t2-tracking-display);
+  line-height: 1.1;
+}
+.theme-2 :where(#mobile-menu > p) {
+  color: var(--t2-gold);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Footer — label tier + one small body size
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.theme-2 :where(footer h3, footer h3 ~ p, footer > div > div > div:first-child > p:first-of-type) {
+  color: var(--t2-gold);
+}
+.theme-2 :where(footer h3 ~ p) {
+  line-height: 2;
+}
+.theme-2 :where(footer > div > div > div:first-child > p:nth-of-type(2), footer ul, footer > div:last-child > p) {
+  font-size: var(--t2-small);
+  line-height: var(--t2-leading-body);
+}

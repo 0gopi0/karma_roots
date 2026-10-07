@@ -2,7 +2,16 @@ import { useEffect, useRef, useState } from 'react'
 import HeroOrbit from './HeroOrbit'
 import Pollen from './Pollen'
 
-export default function Hero() {
+const DEFAULT_COPY = {
+  eyebrow: ['STRATEGIC THINKING', 'DISTINCTIVE IDEAS', 'MEANINGFUL GROWTH'],
+  titleLines: ['Ideas That Grow.', 'Stories That Stay.'],
+  subtitle:
+    'Karma Roots is a boutique marketing and communications firm helping businesses find their voice, shape their presence and grow with purpose, because good brands are not just seen, they are remembered.',
+  cta: 'Let’s talk',
+}
+
+export default function Hero({ copy }) {
+  const c = { ...DEFAULT_COPY, ...copy }
   const ref = useRef(null)
   const [ready, setReady] = useState(false)
 
@@ -47,7 +56,7 @@ export default function Hero() {
             className={`${fade} flex flex-col gap-1.5 font-display text-[0.68rem] tracking-[0.26em] text-gold sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3 sm:text-xs sm:tracking-[0.3em]`}
             style={delay(200)}
           >
-            {['STRATEGIC THINKING', 'DISTINCTIVE IDEAS', 'MEANINGFUL GROWTH'].map((w, i) => (
+            {c.eyebrow.map((w, i) => (
               <span key={w} className="flex items-center gap-3">
                 <span className={`h-1 w-1 rounded-full bg-gold ${i === 0 ? 'sm:hidden' : ''}`} aria-hidden="true" />
                 {w}
@@ -56,19 +65,17 @@ export default function Hero() {
           </p>
 
           <h1 className="mt-6 font-display text-[clamp(2rem,8.6vw,3.6rem)] leading-[1.06] lg:text-[clamp(3rem,5vw,5rem)] text-champagne-50 lg:whitespace-nowrap">
-            <span className="mask-line">
-              <span style={{ '--d': '.35s' }}>Ideas That Grow.</span>
-            </span>
-            <span className="mask-line">
-              <span style={{ '--d': '.5s' }} className="foil">
-                Stories That Stay.
+            {c.titleLines.map((line, i) => (
+              <span key={i} className="mask-line">
+                <span style={{ '--d': `${0.35 + i * 0.15}s` }} className={i > 0 ? 'foil' : undefined}>
+                  {line}
+                </span>
               </span>
-            </span>
+            ))}
           </h1>
 
           <p className={`${fade} mt-6 max-w-[36rem] text-lg leading-relaxed text-champagne-50/85 md:text-xl`} style={delay(900)}>
-            Karma Roots is a boutique marketing and communications firm helping businesses find their voice, shape their presence
-            and grow with purpose, because good brands are not just seen, they are remembered.
+            {c.subtitle}
           </p>
 
           <div className={`${fade} mt-9`} style={delay(1050)}>
@@ -77,7 +84,7 @@ export default function Hero() {
               className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-gradient-to-r from-[#e9cfae] via-[#d8b48c] to-[#c39468] px-7 py-3.5 font-display text-plum-900 shadow-[0_12px_30px_-10px_rgba(196,154,108,.7)] transition-shadow duration-500 hover:shadow-[0_16px_40px_-8px_rgba(233,207,174,.8)]"
             >
               <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/45 to-transparent transition-transform duration-1000 ease-bloom group-hover:translate-x-full" />
-              <span className="relative">Let’s talk</span>
+              <span className="relative">{c.cta}</span>
               <svg viewBox="0 0 20 12" className="relative h-3 w-5 transition-transform duration-500 ease-bloom group-hover:translate-x-1.5" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden="true">
                 <path d="M1 6h17M13 1l5 5-5 5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>

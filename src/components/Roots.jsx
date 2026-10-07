@@ -3,7 +3,16 @@ import { ROOTS } from '../data'
 import Mandala from './Mandala'
 import { MaskHeading, Reveal, SectionMark, TempleBorder } from './bits'
 
-export default function Roots() {
+const DEFAULT_COPY = {
+  mark: 'What we do',
+  titleLines: ['Five roots.', 'One bigger picture.'],
+  intro:
+    'From defining what a brand stands for to taking it to the right audience, Karma Roots works across the full brand journey, with senior-led thinking at every step.',
+  items: ROOTS,
+}
+
+export default function Roots({ copy }) {
+  const c = { ...DEFAULT_COPY, ...copy }
   const [open, setOpen] = useState(0)
 
   // the hero orbit picks a root before scrolling here
@@ -27,10 +36,10 @@ export default function Roots() {
               <Mandala petals={30} strokeWidth={0.6} className="h-full w-full" />
             </div>
 
-            <SectionMark className="relative text-plum-600">What we do</SectionMark>
+            <SectionMark className="relative text-plum-600">{c.mark}</SectionMark>
             <MaskHeading
               className="relative mt-5 font-display text-[clamp(2.3rem,4.6vw,3.9rem)] leading-[1.04] text-plum-700"
-              lines={['Five roots.', 'One bigger picture.']}
+              lines={c.titleLines}
             />
             <span className="relative mt-6 flex items-center gap-3" aria-hidden="true">
               <span className="h-px w-10 bg-gold/60" />
@@ -39,14 +48,13 @@ export default function Roots() {
             </span>
             <Reveal>
               <p className="rise mt-6 max-w-md text-lg text-ink/75" style={{ '--d': '.2s' }}>
-                From defining what a brand stands for to taking it to the right audience, Karma Roots works across the full brand
-                journey, with senior-led thinking at every step.
+                {c.intro}
               </p>
             </Reveal>
           </div>
 
           <Reveal as="ul" className="border-t border-plum-700/20">
-            {ROOTS.map((r, i) => {
+            {c.items.map((r, i) => {
               const on = open === i
               return (
                 <li key={r.key} className="rise border-b border-plum-700/20" style={{ '--d': `${i * 0.08}s` }}>

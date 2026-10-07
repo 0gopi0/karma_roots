@@ -1,0 +1,7 @@
+/* Theme 3 — placeholder (full concept coming next).
+   Exists so `npm run build` passes while Theme 2 is being recolored.
+   Scoped to .theme-3 so the main site is untouched. */
+.theme-3 #top {
+  background-color: var(--color-ivory);
+  color: var(--color-ink);
+}

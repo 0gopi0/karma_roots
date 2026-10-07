@@ -37,34 +37,43 @@ const EDGE = [
   'sm:pr-0',
 ]
 
-export default function Why() {
+const DEFAULT_COPY = {
+  mark: 'Why Karma Roots',
+  titleLines: ['Not just another', 'pair of hands.'],
+  lead: 'We work closely, think deeply and stay involved.',
+  body: 'Karma Roots brings senior experience to the table, combining strategic thinking with creative execution. No unnecessary layers, no one-size-fits-all playbooks, no chasing trends for the sake of it.',
+  closing: 'Just the right thinking, the right people and ideas that have somewhere to go.',
+  pillars: WHY,
+}
+
+export default function Why({ copy }) {
+  const c = { ...DEFAULT_COPY, ...copy }
   return (
     <section id="why" className="relative bg-ivory px-5 py-14 md:px-10 md:py-36">
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-6 md:gap-10 lg:grid-cols-2 lg:gap-20">
           <div>
-            <SectionMark className="text-plum-600">Why Karma Roots</SectionMark>
+            <SectionMark className="text-plum-600">{c.mark}</SectionMark>
             <MaskHeading
               className="mt-5 font-display text-[clamp(2.4rem,6vw,4.6rem)] leading-[1.04] text-plum-700"
-              lines={['Not just another', 'pair of hands.']}
+              lines={c.titleLines}
             />
           </div>
           <Reveal className="lg:pt-14">
             <p className="rise font-display text-2xl leading-snug text-plum-600 md:text-[1.7rem]">
-              We work closely, think deeply and stay involved.
+              {c.lead}
             </p>
             <p className="rise mt-6 max-w-xl text-lg text-ink/75" style={{ '--d': '.12s' }}>
-              Karma Roots brings senior experience to the table, combining strategic thinking with creative execution. No
-              unnecessary layers, no one-size-fits-all playbooks, no chasing trends for the sake of it.
+              {c.body}
             </p>
             <p className="rise mt-4 max-w-xl text-lg italic text-ink/75" style={{ '--d': '.24s' }}>
-              Just the right thinking, the right people and ideas that have somewhere to go.
+              {c.closing}
             </p>
           </Reveal>
         </div>
 
         <Reveal as="ul" className="mt-10 grid border-t border-plum-700/20 sm:grid-cols-2 md:mt-16 lg:mt-24 lg:grid-cols-4">
-          {WHY.map(([title, text], i) => (
+          {c.pillars.map(([title, text], i) => (
             <li
               key={title}
               className={`rise group relative border-b border-plum-700/20 py-7 sm:px-7 md:py-10 lg:border-b-0 ${EDGE[i]}`}

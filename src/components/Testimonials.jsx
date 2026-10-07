@@ -40,11 +40,15 @@ function Arrow({ className = '' }) {
   )
 }
 
-export default function Testimonials() {
+const DEFAULT_COPY = { mark: 'Testimonials', items: TESTIMONIALS }
+
+export default function Testimonials({ copy }) {
+  const c = { ...DEFAULT_COPY, ...copy }
+  const items = c.items
   // Below md the list is a one-card-wide swipe track with arrows; md+ shows the full grid.
   const trackRef = useRef(null)
   const [active, setActive] = useState(0)
-  const last = TESTIMONIALS.length - 1
+  const last = items.length - 1
 
   const sync = () => {
     const el = trackRef.current
@@ -72,7 +76,7 @@ export default function Testimonials() {
 
       <div className="relative mx-auto max-w-6xl">
         <div className="text-center">
-          <SectionMark className="justify-center text-plum-600">Testimonials</SectionMark>
+          <SectionMark className="justify-center text-plum-600">{c.mark}</SectionMark>
           <span className="mx-auto mt-3 block h-px w-12 bg-gradient-to-r from-transparent via-gold/70 to-transparent" aria-hidden="true" />
         </div>
 
@@ -83,7 +87,7 @@ export default function Testimonials() {
             onScroll={sync}
             className="flex snap-x snap-mandatory gap-4 overflow-x-auto overflow-y-hidden overscroll-x-contain pb-8 scrollbar-none md:grid md:grid-cols-3 md:overflow-visible md:pb-0"
           >
-            {TESTIMONIALS.map((t, i) => (
+            {items.map((t, i) => (
               <li
                 key={t.quote}
                 className="rise group flex w-full shrink-0 snap-start rounded-2xl border border-plum-700/15 bg-champagne-50 p-7 shadow-[0_20px_45px_-38px_rgba(77,38,46,.8)] transition-all duration-500 ease-bloom hover:-translate-y-1 hover:border-plum-700/30 hover:shadow-[0_28px_50px_-34px_rgba(77,38,46,.75)]"
@@ -127,7 +131,7 @@ export default function Testimonials() {
               <Arrow className="rotate-180" />
             </button>
             <span className="flex items-center gap-3" aria-hidden="true">
-              {TESTIMONIALS.map((t, i) => (
+              {items.map((t, i) => (
                 <span
                   key={t.quote}
                   className={`h-2 w-2 rotate-45 border border-gold transition-colors duration-500 ease-bloom ${i === active ? 'bg-gold' : ''}`}

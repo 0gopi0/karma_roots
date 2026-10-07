@@ -19,7 +19,7 @@ export function TempleBorder({ color = '#d8baa2', className = '' }) {
 /** Small section marker: the logo's three rising dots + a sentence-case label. */
 export function SectionMark({ children, className = '' }) {
   return (
-    <p className={`flex items-center gap-3 text-[0.95rem] italic ${className}`}>
+    <p className={`section-mark flex items-center gap-3 text-[0.95rem] italic ${className}`}>
       <svg viewBox="0 0 28 12" className="h-3 w-7" fill="none" stroke="currentColor" strokeWidth="1.2" aria-hidden="true">
         <circle cx="4" cy="8" r="2.2" />
         <circle cx="14" cy="3.5" r="2.2" />

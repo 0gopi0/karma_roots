@@ -28,7 +28,17 @@ const ICONS = [
 
 const STEP_MS = 3600
 
-export default function Approach() {
+const DEFAULT_COPY = {
+  mark: 'Our approach',
+  titleLines: ['Root. Build.', 'Reach. Grow.'],
+  intro: 'Four stages we take every brand through, from finding its purpose to turning attention into momentum.',
+  stages: APPROACH,
+  closing: 'Because good marketing isn’t about doing more. It’s about making more of what matters.',
+}
+
+export default function Approach({ copy }) {
+  const c = { ...DEFAULT_COPY, ...copy }
+  const stages = c.stages
   const [active, setActive] = useState(0)
   const [touched, setTouched] = useState(false)
   const [ref, inView] = useInView({ threshold: 0.3 })
@@ -36,9 +46,9 @@ export default function Approach() {
   // walk through the stages on its own until someone picks one
   useEffect(() => {
     if (touched || !inView || prefersReducedMotion()) return
-    const t = setInterval(() => setActive((a) => (a + 1) % APPROACH.length), STEP_MS)
+    const t = setInterval(() => setActive((a) => (a + 1) % stages.length), STEP_MS)
     return () => clearInterval(t)
-  }, [touched, inView])
+  }, [touched, inView, stages.length])
 
   const pick = (i) => {
     setTouched(true)
@@ -52,22 +62,22 @@ export default function Approach() {
       <div className="relative mx-auto max-w-7xl">
         <div className="grid gap-6 lg:grid-cols-2 lg:items-end lg:gap-16">
           <div>
-            <SectionMark className="text-champagne">Our approach</SectionMark>
+            <SectionMark className="text-champagne">{c.mark}</SectionMark>
             <MaskHeading
               className="mt-5 font-display text-[clamp(2.3rem,5.5vw,4.4rem)] leading-[1.04] text-champagne-50"
-              lines={['Root. Build.', 'Reach. Grow.']}
+              lines={c.titleLines}
             />
           </div>
           <Reveal>
             <p className="rise max-w-md text-lg text-champagne/75 lg:pb-2" style={{ '--d': '.2s' }}>
-              Four stages we take every brand through, from finding its purpose to turning attention into momentum.
+              {c.intro}
             </p>
           </Reveal>
         </div>
 
         {/* progress rail linking the four stages */}
         <div className="mt-16 hidden grid-cols-4 lg:grid" aria-hidden="true">
-          {APPROACH.map(([name], i) => (
+          {stages.map(([name], i) => (
             <div key={name} className="relative h-px bg-champagne/15">
               <div
                 className="absolute inset-y-0 left-0 bg-champagne transition-[width] duration-700 ease-bloom"
@@ -83,7 +93,7 @@ export default function Approach() {
         </div>
 
         <ol ref={ref} className="mt-8 grid gap-4 sm:grid-cols-2 md:mt-10 lg:mt-8 lg:grid-cols-4 lg:gap-5">
-          {APPROACH.map(([name, text], i) => {
+          {stages.map(([name, text], i) => {
             const on = active === i
             return (
               <li key={name}>
@@ -135,7 +145,7 @@ export default function Approach() {
           <ScrollWords
             className="font-display text-[clamp(1.8rem,4.4vw,3.4rem)] leading-[1.2] text-champagne-50"
             dim="opacity-15"
-            text="Because good marketing isn’t about doing more. It’s about making more of what matters."
+            text={c.closing}
           />
         </div>
       </div>

@@ -4,7 +4,7 @@ import Mandala from './Mandala'
 import { MaskHeading, Reveal, SectionMark, TempleBorder } from './bits'
 
 // Circular text that rings the lotus seal on the portrait.
-function Seal() {
+function Seal({ text }) {
   return (
     <div className="absolute -bottom-6 -right-4 h-28 w-28 rounded-full bg-plum-700 text-champagne shadow-[0_18px_40px_-14px_rgba(43,18,25,.8)] sm:-right-8 sm:h-32 sm:w-32">
       <svg viewBox="0 0 100 100" className="h-full w-full" aria-hidden="true">
@@ -13,7 +13,7 @@ function Seal() {
         </defs>
         <text className="fill-current font-display text-[8.4px] tracking-[0.18em]">
           <textPath href="#seal-ring" textLength="228" lengthAdjust="spacing">
-            FOUNDER ✦ KARMA ROOTS ✦ BRAND STORYTELLER ✦
+            {text}
           </textPath>
         </text>
       </svg>
@@ -34,7 +34,15 @@ function Seal() {
   )
 }
 
-export default function Founder() {
+const DEFAULT_COPY = {
+  mark: 'Meet the founder',
+  ...FOUNDER,
+  brandsLabel: 'Brands Sandhya has built for',
+  seal: 'FOUNDER ✦ KARMA ROOTS ✦ BRAND STORYTELLER ✦',
+}
+
+export default function Founder({ copy }) {
+  const c = { ...DEFAULT_COPY, ...copy }
   return (
     <section id="founder" className="relative overflow-hidden bg-champagne-50 px-5 py-14 md:px-10 md:py-28">
       <TempleBorder color="#4d262e" className="absolute inset-x-0 top-0 opacity-25" />
@@ -54,23 +62,23 @@ export default function Founder() {
             <div className="relative overflow-hidden rounded-t-full bg-champagne p-2 shadow-[0_40px_70px_-30px_rgba(77,38,46,.6)]">
               <img
                 src={portrait}
-                alt={`${FOUNDER.name}, founder of Karma Roots`}
+                alt={`${c.name}, founder of Karma Roots`}
                 width="360"
                 height="416"
                 loading="lazy"
                 className="aspect-[360/416] w-full rounded-t-full object-cover"
               />
             </div>
-            <Seal />
+            <Seal text={c.seal} />
           </div>
         </Reveal>
 
         <div className="lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:self-center">
-          <SectionMark className="text-plum-600">Meet the founder</SectionMark>
-          <MaskHeading className="mt-5 font-display text-[clamp(2.4rem,5.2vw,4.2rem)] leading-[1.04] text-plum-700" lines={[FOUNDER.name]} />
+          <SectionMark className="text-plum-600">{c.mark}</SectionMark>
+          <MaskHeading className="mt-5 font-display text-[clamp(2.4rem,5.2vw,4.2rem)] leading-[1.04] text-plum-700" lines={[c.name]} />
           <Reveal>
             <p className="rise mt-3 text-lg italic text-plum-600" style={{ '--d': '.15s' }}>
-              {FOUNDER.role}
+              {c.role}
             </p>
             <span className="mt-5 flex items-center gap-3" aria-hidden="true">
               <span className="h-px w-10 bg-gold/60" />
@@ -78,15 +86,15 @@ export default function Founder() {
               <span className="h-px w-10 bg-gold/60" />
             </span>
             <p className="rise mt-6 max-w-xl text-lg text-ink/75" style={{ '--d': '.25s' }}>
-              {FOUNDER.intro}
+              {c.intro}
             </p>
 
             {/* brand list: hidden on mobile */}
             <p className="rise mt-8 hidden text-[0.95rem] italic text-ink/70 md:block" style={{ '--d': '.35s' }}>
-              Brands Sandhya has built for
+              {c.brandsLabel}
             </p>
             <ul className="rise mt-3 hidden flex-wrap items-center gap-x-6 gap-y-2 md:flex" style={{ '--d': '.45s' }}>
-              {FOUNDER.brands.map((b) => (
+              {c.brands.map((b) => (
                 <li key={b} className="flex items-center gap-2.5 font-display text-lg text-plum-700">
                   <span className="h-1.5 w-1.5 rotate-45 bg-gold" aria-hidden="true" />
                   {b}
@@ -106,7 +114,7 @@ export default function Founder() {
             <span className="absolute -right-1 -top-1 h-2 w-2 rotate-45 border border-gold/60" aria-hidden="true" />
             <span className="absolute -bottom-1 -left-1 h-2 w-2 rotate-45 border border-gold/60" aria-hidden="true" />
             <span className="absolute -bottom-1 -right-1 h-2 w-2 rotate-45 border border-gold/60" aria-hidden="true" />
-            {FOUNDER.stats.map(([value, label]) => (
+            {c.stats.map(([value, label]) => (
               <div key={label} className="flex flex-col-reverse justify-end gap-2 px-2 py-5 text-center">
                 <dt className="text-[0.8rem] leading-snug text-ink/70">{label}</dt>
                 <dd className="font-display text-[2.2rem] leading-none text-plum-700">{value}</dd>

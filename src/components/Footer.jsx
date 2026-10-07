@@ -112,7 +112,26 @@ function Col({ title, children }) {
 
 const linkClass = 'transition-colors duration-300 hover:text-champagne-50'
 
-export default function Footer() {
+const DEFAULT_COPY = {
+  tagline: 'Ideas that grow, stories that stay.',
+  blurb: 'A boutique marketing and communications firm built on the belief that good brands are not just seen, they are remembered.',
+  linksTitle: 'Quick Links',
+  links: LINKS,
+  servicesTitle: 'Our Services',
+  services: ROOTS.map((r) => r.area),
+  contactTitle: 'Get In Touch',
+  location: CONTACT_LOCATION,
+  email: CONTACT_EMAIL,
+  phone: CONTACT_PHONE,
+  closingLines: ['Let’s create', 'something meaningful.'],
+  cta: 'Start a Conversation',
+  copyright: 'Karma Roots',
+  creditLabel: 'Designed by',
+  creditName: 'The Website Makers',
+}
+
+export default function Footer({ copy }) {
+  const c = { ...DEFAULT_COPY, ...copy }
   return (
     <footer className="relative isolate overflow-hidden bg-plum-950 text-champagne-50">
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(90%_70%_at_50%_0%,rgba(110,52,65,.4),transparent_70%)]" />
@@ -137,10 +156,10 @@ export default function Footer() {
               <span className="font-display text-xs tracking-[0.42em] text-champagne-50">ROOTS</span>
             </div>
             <p className="mt-4 text-[0.6rem] tracking-[0.16em] text-champagne uppercase">
-              Ideas that grow, stories that stay.
+              {c.tagline}
             </p>
             <p className="mt-3 max-w-[17rem] text-sm leading-relaxed text-champagne-50/60">
-              A boutique marketing and communications firm built on the belief that good brands are not just seen, they are remembered.
+              {c.blurb}
             </p>
             <ul className="mt-6 flex items-center gap-3">
               {SOCIALS.map((s) => (
@@ -157,9 +176,9 @@ export default function Footer() {
             </ul>
           </div>
 
-          <Col title="Quick Links">
+          <Col title={c.linksTitle}>
             <ul className="mt-5 space-y-3 text-[0.9rem] text-champagne-50/70">
-              {LINKS.map((l) => (
+              {c.links.map((l) => (
                 <li key={l.href}>
                   <a href={l.href} className="group/link relative inline-block transition-colors duration-300 hover:text-champagne-50">
                     {l.label}
@@ -173,49 +192,52 @@ export default function Footer() {
             </ul>
           </Col>
 
-          <Col title="Our Services">
+          <Col title={c.servicesTitle}>
             <ul className="mt-5 space-y-3 text-[0.9rem] text-champagne-50/70">
-              {ROOTS.map((r) => (
-                <li key={r.key}>{r.area}</li>
+              {c.services.map((s) => (
+                <li key={s}>{s}</li>
               ))}
             </ul>
           </Col>
 
-          <Col title="Get In Touch">
+          <Col title={c.contactTitle}>
             <ul className="mt-5 space-y-4 text-[0.9rem] text-champagne-50/70">
               <li className="group flex items-center gap-3">
                 <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-champagne/25 text-gold transition-all duration-500 ease-bloom group-hover:-translate-y-0.5 group-hover:border-gold/70 group-hover:bg-champagne/10 group-hover:text-champagne-50">
                   <Glyph>{MapPin}</Glyph>
                 </span>
-                <span className="transition-colors duration-300 group-hover:text-champagne-50">{CONTACT_LOCATION}</span>
+                <span className="transition-colors duration-300 group-hover:text-champagne-50">{c.location}</span>
               </li>
               <li className="group flex items-center gap-3">
                 <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-champagne/25 text-gold transition-all duration-500 ease-bloom group-hover:-translate-y-0.5 group-hover:border-gold/70 group-hover:bg-champagne/10 group-hover:text-champagne-50">
                   <Glyph>{Mail}</Glyph>
                 </span>
-                <a href={`mailto:${CONTACT_EMAIL}`} className={linkClass}>
-                  {CONTACT_EMAIL}
+                <a href={`mailto:${c.email}`} className={linkClass}>
+                  {c.email}
                 </a>
               </li>
               <li className="group flex items-center gap-3">
                 <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-champagne/25 text-gold transition-all duration-500 ease-bloom group-hover:-translate-y-0.5 group-hover:border-gold/70 group-hover:bg-champagne/10 group-hover:text-champagne-50">
                   <Glyph>{Phone}</Glyph>
                 </span>
-                <a href={`tel:${CONTACT_PHONE.replace(/\s/g, '')}`} className={linkClass}>
-                  {CONTACT_PHONE}
+                <a href={`tel:${c.phone.replace(/\s/g, '')}`} className={linkClass}>
+                  {c.phone}
                 </a>
               </li>
             </ul>
             <p className="mt-6 text-[0.68rem] leading-[1.9] tracking-[0.18em] text-champagne uppercase">
-              Let’s create
-              <br />
-              something meaningful.
+              {c.closingLines.map((line, i) => (
+                <span key={i}>
+                  {i > 0 && <br />}
+                  {line}
+                </span>
+              ))}
             </p>
             <a
               href="#contact"
               className="group mt-4 inline-flex items-center gap-2.5 whitespace-nowrap rounded-full border border-champagne/40 px-5 py-2.5 text-[0.85rem] text-champagne-50 transition-all duration-500 ease-bloom hover:-translate-y-0.5 hover:border-champagne hover:bg-champagne hover:text-plum-900"
             >
-              Start a Conversation
+              {c.cta}
               <Glyph className="h-4 w-4 transition-transform duration-500 ease-bloom group-hover:translate-x-1">{ArrowRight}</Glyph>
             </a>
           </Col>
@@ -228,19 +250,19 @@ export default function Footer() {
           className="absolute left-1/2 top-0 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rotate-45 border border-gold/40 bg-plum-950"
         />
         <p className="text-sm text-champagne/70">
-          <span className="whitespace-nowrap">Copyright © {new Date().getFullYear()} Karma Roots</span>{' '}
+          <span className="whitespace-nowrap">Copyright © {new Date().getFullYear()} {c.copyright}</span>{' '}
           <span aria-hidden="true" className="mx-3 hidden text-champagne/30 sm:inline">
             |
           </span>{' '}
           <span className="whitespace-nowrap">
-            Designed by{' '}
+            {c.creditLabel}{' '}
             <a
               href="https://thewebsitemakers.in"
               target="_blank"
               rel="noreferrer"
               className="text-champagne underline decoration-champagne/30 underline-offset-4 transition-colors hover:decoration-champagne"
             >
-              The Website Makers
+              {c.creditName}
             </a>
           </span>
         </p>

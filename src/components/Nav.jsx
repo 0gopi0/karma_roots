@@ -1,8 +1,17 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { NAV } from '../data'
 import Lotus from './Lotus'
 
-export default function Nav() {
+const DEFAULT_COPY = {
+  brand: 'Karma Roots',
+  links: NAV,
+  cta: 'Let’s talk',
+  menuTagline: 'Ideas that grow. Stories that stay.',
+}
+
+export default function Nav({ copy }) {
+  const c = { ...DEFAULT_COPY, ...copy }
   const [scrolled, setScrolled] = useState(false)
   const [hidden, setHidden] = useState(false)
   const [open, setOpen] = useState(false)
@@ -37,11 +46,11 @@ export default function Nav() {
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 md:px-10" aria-label="Main">
           <a href="#top" className="group flex items-center gap-3 text-champagne" onClick={() => setOpen(false)}>
             <Lotus className="h-9 w-10 transition-transform duration-700 ease-bloom group-hover:-translate-y-0.5 group-hover:scale-110" strokeWidth={3} dots={false} />
-            <span className="font-display text-lg tracking-[0.18em]">Karma Roots</span>
+            <span className="font-display text-lg tracking-[0.18em]">{c.brand}</span>
           </a>
 
           <ul className="hidden items-center gap-10 md:flex">
-            {NAV.slice(0, 3).map((n) => (
+            {c.links.slice(0, 3).map((n) => (
               <li key={n.href}>
                 <a
                   href={n.href}
@@ -52,12 +61,33 @@ export default function Nav() {
                 </a>
               </li>
             ))}
+            {/* Dev-only: preview link to the alternate theme */}
+            {import.meta.env.DEV && (
+              <li>
+                <Link
+                  to="/theme-2"
+                  className="text-[0.8rem] uppercase tracking-[0.18em] text-gold/80 transition-colors hover:text-gold"
+                >
+                  Theme 2
+                </Link>
+              </li>
+            )}
+            {import.meta.env.DEV && (
+              <li>
+                <Link
+                  to="/theme-3"
+                  className="text-[0.8rem] uppercase tracking-[0.18em] text-gold/80 transition-colors hover:text-gold"
+                >
+                  Theme 3
+                </Link>
+              </li>
+            )}
             <li>
               <a
                 href="#contact"
                 className="rounded-full border border-champagne/50 px-6 py-2.5 text-[0.95rem] text-champagne-50 transition-all duration-500 ease-bloom hover:border-champagne hover:bg-champagne hover:text-plum-900"
               >
-                Let’s talk
+                {c.cta}
               </a>
             </li>
           </ul>
@@ -90,7 +120,7 @@ export default function Nav() {
           strokeWidth={0.6}
         />
         <ul className="relative mt-32 flex flex-col gap-2 px-8">
-          {NAV.map((n, i) => (
+          {c.links.map((n, i) => (
             <li
               key={n.href}
               className={`transition-all duration-700 ease-bloom ${open ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'}`}
@@ -107,7 +137,7 @@ export default function Nav() {
             </li>
           ))}
         </ul>
-        <p className="relative mt-auto px-8 pb-10 italic text-champagne/70">Ideas that grow. Stories that stay.</p>
+        <p className="relative mt-auto px-8 pb-10 italic text-champagne/70">{c.menuTagline}</p>
       </div>
     </>
   )
